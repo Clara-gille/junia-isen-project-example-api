@@ -41,4 +41,3 @@ override.tf.json
 .terraformrc
 terraform.rc
 /infrastructure/.terraform
-/infrastructure/.terraform
