@@ -3,15 +3,8 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-<<<<<<< Updated upstream
-resource "azurerm_resource_group" "example" {
-  name     = "shop-app-rg"
-  location = "France Central"
-=======
-
 resource "random_id" "random" {
   byte_length = 6
->>>>>>> Stashed changes
 }
 
 resource "azurerm_resource_group" "shop" {
