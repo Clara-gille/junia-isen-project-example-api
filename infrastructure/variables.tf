@@ -1,11 +1,11 @@
 variable "subscription_id" {
-  description = "L'ID de la subscription Azure"
+  description = "Azure subscription ID"
   type        = string
   default     = "2d8d3767-6ea6-4e1a-a6b1-606e793fca7d"
 }
 
 variable "location" {
-  description = "La localisation de la ressource"
+  description = "Location of the resource group"
   type        = string
   default     = "francecentral"
 }
