@@ -1,13 +1,16 @@
-variable "subscription_id" {
-  description = "L'ID de la subscription Azure"
+variable "location" {
+  description = "Region for resources"
   type        = string
-  default     = "2d8d3767-6ea6-4e1a-a6b1-606e793fca7d"
 }
 
-variable "location" {
-  description = "La localisation de la ressource"
+variable "resource_group_name" {
+  description = "Name of resource group"
   type        = string
-  default     = "francecentral"
+}
+
+variable "random_id" {
+  description = "Random ID"
+  type        = string
 }
 
 variable "username_db" {
@@ -18,7 +21,20 @@ variable "username_db" {
 variable "password_db" {
   description = "Password for the database"
   type        = string
-  sensitive = true
+}
+
+variable "database_name" {
+  description = "Name of the database"
+  type        = string 
+}
+
+variable "database_host" {
+  description = "Host of the database"
+  type        = string
+}
+variable "subnet_id_app_service" {
+  description = "ID of the subnet for the app service"
+  type        = string
 }
 
 variable "docker_image_name" {
