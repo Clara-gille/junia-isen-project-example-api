@@ -4,7 +4,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "example" {
   name     = "shop-app-rg"
-  location = "East US"
+  location = "France Central"
 }
 
 resource "azurerm_app_service_plan" "example" {
