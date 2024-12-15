@@ -3,7 +3,8 @@ resource "azurerm_public_ip" "public_ip" {
   name                = "public-ip-${var.random_id}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  allocation_method   = "Static"  
+  allocation_method   = "Static"
+  sku                 = "Standard"  
 }
 
 # Local block to manage some variables used further down
