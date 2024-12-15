@@ -25,7 +25,7 @@ resource "azurerm_linux_web_app" "app_service_project" {
   app_settings = {
     DATABASE_HOST = var.database_host
     DATABASE_PORT = "5432"
-    DATABASE_NAME = "app"
+    DATABASE_NAME = "shop"
     DATABASE_USER = var.username_db
     DATABASE_PASSWORD = var.password_db
     PORT = "5000"
