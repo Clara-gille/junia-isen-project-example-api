@@ -62,7 +62,7 @@ resource "azurerm_application_gateway" "app_gateway" {
         port                    = 5000
         path                    = "/"
         protocol                = "Http"
-        request_timeout         = 2
+        request_timeout         = 30
     }
 
     # Frontend listener
