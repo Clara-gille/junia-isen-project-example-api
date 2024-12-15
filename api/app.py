@@ -18,7 +18,8 @@ def get_db_connection():
         port=DATABASE_PORT,
         user=DATABASE_USER,
         password=DATABASE_PASSWORD,
-        dbname=DATABASE_NAME
+        dbname=DATABASE_NAME,
+        connect_timeout=10,
     )
     return conn
 
