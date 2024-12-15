@@ -11,6 +11,9 @@ DATABASE_USER = os.getenv('DATABASE_USER')
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 DATABASE_NAME = os.getenv('DATABASE_NAME')
 
+# Variable d'environnement pour le port de la web app
+APP_PORT = os.getenv('PORT')
+
 # Connexion à la base de données PostgreSQL
 def get_db_connection():
     conn = psycopg2.connect(
@@ -22,6 +25,59 @@ def get_db_connection():
         connect_timeout=10,
     )
     return conn
+
+def placeholder_items() :
+    return [
+        {
+            "id" : 1,
+            "name" : "TV",
+            "price" : 1500
+        },
+        {
+            "id" : 2,
+            "name" : "Chair",
+            "price" : 50
+        },
+        {
+            "id" : 3,
+            "name" : "Pen",
+            "price" : 2
+        }
+    ]
+
+def placeholder_baskets() :
+    return [
+        {
+            "id" : 1,
+            "user_id" : 1,
+            "item_id" : 2
+        },
+        {
+            "id" : 2,
+            "user_id" : 2,
+            "item_id" : 3
+        },
+        {
+            "id" : 3,
+            "user_id" : 1,
+            "item_id" : 1
+        }
+    ]
+
+def placeholder_users() :
+    return [
+        {
+            "id" : 1,
+            "name" : "Doe",
+            "email" : "john@doe.com"
+        },
+        {
+            "id" : 2,
+            "name" : "Foo",
+            "email" : "foo@bar.com"
+        }
+    ]
+
 
 # Fonction pour créer les tables si elles n'existent pas
 def create_tables():
@@ -57,26 +113,24 @@ def create_tables():
     conn.close()
 
 # Appel de la fonction pour créer les tables au démarrage de l'application
-create_tables()
+# create_tables()
 
 @app.route("/")
 def home():
     return jsonify({"message": "Welcome to the Shop API!"})
 
 # Routes pour les items
-@app.route("/items", methods=["GET", "POST"])
+@app.route("/items", methods=["GET"])
 def handle_items():
-    conn = get_db_connection()
-    cur = conn.cursor()
 
     if request.method == "GET":
-        cur.execute("SELECT * FROM items")
-        items = cur.fetchall()
-        cur.close()
-        conn.close()
-        return jsonify({"items": items})
+        return jsonify({"items": placeholder_items()})
 
     elif request.method == "POST":
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+
         data = request.get_json()
         name = data.get('name')
         price = data.get('price')
@@ -92,19 +146,16 @@ def handle_items():
         return jsonify({"message": "Item created", "item_id": item_id}), 201
 
 # Routes pour les baskets
-@app.route("/baskets", methods=["GET", "POST"])
+@app.route("/baskets", methods=["GET"])
 def handle_baskets():
-    conn = get_db_connection()
-    cur = conn.cursor()
 
     if request.method == "GET":
-        cur.execute("SELECT * FROM baskets")
-        baskets = cur.fetchall()
-        cur.close()
-        conn.close()
-        return jsonify({"baskets": baskets})
+        return jsonify({"baskets": placeholder_baskets()})
 
     elif request.method == "POST":
+        conn = get_db_connection()
+        cur = conn.cursor()
+
         data = request.get_json()
         user_id = data.get('user_id')
         item_id = data.get('item_id')
@@ -120,19 +171,17 @@ def handle_baskets():
         return jsonify({"message": "Basket created", "basket_id": basket_id}), 201
 
 # Routes pour les utilisateurs
-@app.route("/users", methods=["GET", "POST"])
+@app.route("/users", methods=["GET"])
 def handle_users():
-    conn = get_db_connection()
-    cur = conn.cursor()
 
     if request.method == "GET":
-        cur.execute("SELECT * FROM users")
-        users = cur.fetchall()
-        cur.close()
-        conn.close()
-        return jsonify({"users": users})
+        return jsonify({"users": placeholder_users()})
 
     elif request.method == "POST":
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+
         data = request.get_json()
         name = data.get('name')
         email = data.get('email')
@@ -148,4 +197,4 @@ def handle_users():
         return jsonify({"message": "User created", "user_id": user_id}), 201
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=APP_PORT)
